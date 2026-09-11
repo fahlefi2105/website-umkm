@@ -1,36 +1,31 @@
 body {
     margin: 0;
-    color: #2f2f2f;
+    color: #2f2118;
     background-color: #f6f0e8;
     font-family: Arial, sans-serif;
 }
-
 .page {
     max-width: 920px;
     margin: 0 auto;
-    padding:32px 20px;
+    padding: 32px 20px;
 }
-
 .hero {
-    padding: 36px ;
-    color: rgb(193, 184, 184);
-    background-color: #e65304;
+    padding: 36px 0;
+    color:  white;
+    background: #6b422c;
     border-radius: 24px;
 }
-
-.eybrow {
-    margin:0 0 8px 0;
-    letter-spacing: 0.14em;
+.eyebrow {
+    margin: 0 0 8px;
+    letter-spacing:0.14em;
     text-transform: uppercase;
 }
-
-.products{
+.products {
     padding-left: 1.2rem;
 }
-
 button {
     padding: 12px 18px;
-    color: #2f2f2f;
+    color: #2f2118;
     font-weight: 700;
     cursor: pointer;
     background: #ffd166;
