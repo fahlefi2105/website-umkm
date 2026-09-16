@@ -1,38 +1,78 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Kopi Nusa - Website UMKM</title>
-        <link rel="stylesheet" href="css/style.css">
-     </head>
-    
-    <body>
-        <main class="page">
-            <section class="hero">
-                <p class="eyebrow">umkm Pekalongan</p>
-                <h1 >Kopi Nusa</h1>
-                <p>Kopi lokal pilihan orang orang</p>
-               <button class="promo-button" type="button">lihat promo hari ini</button>
-               <p class="promo-text">Promo beli 2 gratis 1</p>
 
-            </section>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kopi Nusa - Website UMKM</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
 
-            <section aria-labelledby="produk-title">
-                <h2 id="produk-title">Produk Unggulan</h2>
-                <ul class="products">
-                    <li>Kopi Tubruk Signature Rp18.000</li>
-                    <li>Cold Brew Aren Rp22.000</li>
-                    <li>Kopi Susu Nusa (espresso, susu segar, sedikit karamel) Rp20.000</li>
+<body>
+    <a class="skip-link" href="#konten">Lewati ke konten utama</a>
+    <header class="site-header">
+        <nav class="nav" aria-label="Navigasi utama">
+            <a class="brand" href="index.html"> Kopi Nusa</a>
 
-                </ul>
-            </section>
+            <ul>
+                <li><a href="index.html" aria-current="page">Beranda</a></li>
+                <li><a href="tentang.html">Tentang Kami</a></li>
+                <li><a href="#kontak">Kontak Singkat</a></li>
+            </ul>
+        </nav>
+    </header>
 
-            <section class="info-section" aria-labelledby="info-title">
-                <h2 id="info-title">Jam Buka & Lokasi</h2>
+    <main id="konten" class="page">
 
-                    <section class="info-container">
-                    <section class="info-card">
+        <section class="hero" id="beranda" aria-labelledby="hero-title">
+            <p class="eyebrow">UMKM PEKALONGAN</p>
+            <h1 id="hero-title">Kopi Nusa</h1>
+            <p class="hero-text">Kopi lokal pilihan orang-orang.</p>
+
+            <button class="promo-button" type="button">
+                Lihat Promo Hari Ini
+            </button>
+
+            <p class="promo-text">Promo beli 2 gratis 1</p>
+
+            <img src="assets/images/kopi-nusa.png" alt="Kopi Nusa">
+        </section>
+
+        <section class="products" id="produk" aria-labelledby="produk-title">
+            <h2 id="produk-title">Produk Unggulan</h2>
+
+            <div class="product-list">
+
+                <article class="product-card">
+                    <img src="assets/images/kopi-tubruk.png" alt="Kopi Tubruk Signature">
+                    <h3>Kopi Tubruk Signature</h3>
+                    <p>Kopi dengan rasa klasik dan aroma yang kuat.</p>
+                    <p class="price">Rp18.000</p>
+                </article>
+
+                <article class="product-card">
+                    <img src="assets/images/cold-brew.png" alt="Cold Brew Aren">
+                    <h3>Cold Brew Aren</h3>
+                    <p>Kopi dingin dengan perpaduan kopi dan gula aren.</p>
+                    <p class="price">Rp22.000</p>
+                </article>
+
+                <article class="product-card">
+                    <img src="assets/images/kopi-susu.png" alt="Kopi Susu Nusa">
+                    <h3>Kopi Susu Nusa</h3>
+                    <p>Espresso, susu segar, dan sedikit karamel.</p>
+                    <p class="price">Rp20.000</p>
+                </article>
+
+            </div>
+        </section>
+
+        <section class="info-section" aria-labelledby="info-title">
+            <h2 id="info-title">Jam Buka &amp; Lokasi</h2>
+
+            <div class="info-container">
+
+                <section class="info-card">
                     <h3>Jam Buka</h3>
                     <p>Senin - Jumat: 09.00 - 23.00 WIB</p>
                     <p>Sabtu - Minggu: 10.00 - 00.00 WIB</p>
@@ -40,13 +80,28 @@
 
                 <section class="info-card">
                     <h3>Lokasi</h3>
-                    <p>Jl. kusuma bangsa Pekalongan, Pekalongan, Jawa Tengah</p>
-                     <p>Kunjungi Kopi Nusa untuk menikmati kopi lokal pilihan.</p>
+                    <p>Jl. Kusuma Bangsa Pekalongan, Pekalongan, Jawa Tengah</p>
                 </section>
-                
-                </section>
-            </section>
-        </main>
-        <script src="js/scrpit.js"></script>
-    </body>
+
+            </div>
+        </section>
+
+        <section class="contact-section" id="kontak" aria-labelledby="kontak-title">
+            <h2 id="kontak-title">Kontak Singkat</h2>
+            <p>Untuk pemesanan dan informasi lebih lanjut, hubungi kami melalui WhatsApp.</p>
+            <a href="https://wa.me/6285846058980" target="_blank">
+                Hubungi Kopi Nusa melalui WhatsApp
+            </a>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Kopi Nusa. Semua hak dilindungi.</p>
+    </footer>
+
+    <script src="js/scrpit.js"></script>
+
+</body>
+
 </html>
