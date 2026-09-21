@@ -1,8 +1,18 @@
-const promoButton = document.querySelector('.promo-button');
-const promoText = document.querySelector('.promo-text');
+const promoButton = document.getElementById("promoButton");
 
-promoButton.addEventListener('click', () => {
-    promoText.style.display = 'block';
-    promoButton.textContent = 'Beli 2 Gratis 1, khusus hari ini!';
-    console.log('Terima kasih sudah mampir ke Kopi Nusa!');
-});
+if (promoButton) {
+  promoButton.addEventListener("click", function () {
+    promoButton.textContent = "Promo hari ini: Beli 2 Cold Brew Gratis 1 Kopi Tubruk Signature!";
+  });
+}
+
+const rows = document.querySelectorAll("tbody tr");
+
+if (rows.length > 0) {
+  console.log("Jumlah produk pada tabel:", rows.length);
+}
+
+const caption = document.querySelector("caption");
+if (caption) {
+  console.log("Caption tabel:", caption.textContent);
+}
