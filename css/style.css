@@ -162,3 +162,16 @@ td {
     text-align: left;
     border: 1px solid #dccbbc;
 }
+body { 
+    font-family: 
+    system-ui, sans-serif; 
+    padding: 1rem; 
+}
+label, input, button {
+     display: block; 
+     margin-bottom: .6rem; 
+}
+:focus-visible { 
+    outline: 3px solid #2563eb; 
+    outline-offset: 2px; 
+}
