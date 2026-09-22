@@ -26,54 +26,63 @@
       <h1>Kontak Kopi Nusa</h1>
       <p>Silakan kirim pertanyaan tentang produk, pesanan, atau kerja sama.</p>
 
-      <form id="form-kontak" action="#" method="post">
-        <div class="field">
-          <label for="nama">Nama lengkap</label>
-          <input id="nama" name="nama" type="text" autocomplete="name" required minlength="3" />
-        </div>
+        <form id="form-kontak" action="#" method="post">
+            <div class="field">
+            <label for="nama">Nama lengkap</label>
+            <input id="nama" name="nama" type="text" autocomplete="name" required />
+            </div>
 
-        <div class="field">
-          <label for="email">Email</label>
-          <input id="email" name="email" type="email" autocomplete="email" required />
-        </div>
+            <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" required />
+            </div>
 
-        <div class="field">
-          <label for="whatsapp">Nomor WhatsApp</label>
-          <input id="whatsapp" name="whatsapp" type="tel" autocomplete="tel" required placeholder="081234567890" pattern="[0-9]{10,15}" title="Nomor WhatsApp harus berupa 10-15 digit angka" />
-        </div>
+            <div class="field">
+            <label for="whatsapp">WhatsApp</label>
+            <input id="whatsapp" name="whatsapp" type="tel" autocomplete="tel" required />
+            </div>
 
-        <fieldset>
-          <legend>Waktu kontak yang diinginkan</legend>
-          <label for="waktu-pagi"><input type="radio" id="waktu-pagi" name="waktu_kontak" value="Pagi (08.00 - 12.00)" required /> Pagi (08.00 - 12.00)</label>
-          <label for="waktu-siang"><input type="radio" id="waktu-siang" name="waktu_kontak" value="Siang (12.00 - 15.00)" /> Siang (12.00 - 15.00)</label>
-          <label for="waktu-sore"><input type="radio" id="waktu-sore" name="waktu_kontak" value="Sore (15.00 - 18.00)" /> Sore (15.00 - 18.00)</label>
-          <label for="waktu-malam"><input type="radio" id="waktu-malam" name="waktu_kontak" value="Malam (18.00 - 21.00)" /> Malam (18.00 - 21.00)</label>
-        </fieldset>
+            <div class="field">
+            <label for="waktu">Waktu Pengiriman</label>
+            <select id="waktu" name="waktu" required>
+                <option value="">Pilih waktu</option>
+                <option value="pagi">Pagi </option>
+                <option value="siang">Siang </option>
+                <option value="sore">Sore </option>
+                <option value="malam">Malam </option>
+            </select>
+            </div>
 
-        <div class="field">
-          <label for="paket">Paket yang diminati</label>
-          <select id="paket" name="paket" required>
-            <option value="">Pilih paket</option>
-            <option value="rumahan">Paket rumahan</option>
-            <option value="kantor">Paket kantor</option>
-            <option value="reseller">Paket reseller</option>
-          </select>
-        </div>
+            <div class="field">
+            <label for="paket">Paket yang diminati</label>
+            <select id="paket" name="paket" required>
+                <option value="">Pilih paket</option>
+                <option value="rumahan">Paket rumahan</option>
+                <option value="kantor">Paket kantor</option>
+                <option value="reseller">Paket reseller</option>
+            </select>
+            </div>
 
-        <fieldset>
-          <legend>Topik pertanyaan</legend>
-          <label for="topik-produk"><input type="radio" id="topik-produk" name="topik" value="Informasi produk" required /> Informasi produk</label>
-          <label for="topik-pesanan"><input type="radio" id="topik-pesanan" name="topik" value="Status pesanan" /> Status pesanan</label>
-          <label for="topik-kerja-sama"><input type="radio" id="topik-kerja-sama" name="topik" value="Kerja sama" /> Kerja sama</label>
-        </fieldset>
+            <fieldset>
+            <legend>Topik pertanyaan</legend>
+            <label><input type="radio" name="topik" value="produk" required /> Informasi produk</label>
+            <label><input type="radio" name="topik" value="pesanan" /> Status pesanan</label>
+            <label><input type="radio" name="topik" value="kerja sama" /> Kerja sama</label>
+            </fieldset>
 
-        <div class="field">
-          <label for="pesan">Pesan</label>
-          <textarea id="pesan" name="pesan" rows="5" required minlength="10"></textarea>
-        </div>
+            <fieldset>
+            <legend>Metode kontak</legend>
+            <label><input type="radio" name="metode" value="email" /> Email</label>
+            <label><input type="radio" name="metode" value="whatsapp" /> WhatsApp</label>
+            </fieldset>
 
-        <button type="submit">Tampilkan Preview</button>
-      </form>
+            <div class="field">
+            <label for="pesan">Pesan</label>
+            <textarea id="pesan" name="pesan" rows="5" required minlength="10"></textarea>
+            </div>
+
+            <button type="submit">Tampilkan Preview</button>
+        </form>
 
       <section aria-labelledby="preview-title">
         <h2 id="preview-title">Preview Data</h2>

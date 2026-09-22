@@ -161,17 +161,20 @@ td {
     padding: 10px;
     text-align: left;
     border: 1px solid #dccbbc;
+}.field { 
+    margin-bottom: 
+    16px; 
 }
-body { 
-    font-family: 
-    system-ui, sans-serif; 
-    padding: 1rem; 
+.field label { 
+    display: block; 
+    margin-bottom: 6px; 
 }
-label, input, button {
-     display: block; 
-     margin-bottom: .6rem; 
+fieldset { 
+    margin: 0 0 16px; 
 }
-:focus-visible { 
-    outline: 3px solid #2563eb; 
-    outline-offset: 2px; 
+#preview-form { 
+    padding: 16px; 
+    white-space: pre-wrap; 
+    background: white; 
+    border: 1px solid #ccc;
 }
