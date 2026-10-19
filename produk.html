@@ -7,11 +7,29 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
 <a class="skip-link" href="#konten">Lewati ke konten utama</a>
+
 <header class="site-header">
-  <nav class="nav" aria-label="Navigasi utama">
+  <nav class="nav container" aria-label="Navigasi utama">
     <a class="brand" href="index.html">Kopi Nusa</a>
-    <ul>
+
+    <details class="mobile-menu">
+      <summary aria-label="Buka menu navigasi">
+        <span class="hamburger" aria-hidden="true">☰</span>
+        <span>Menu</span>
+      </summary>
+
+      <ul>
+        <li><a href="index.html">Beranda</a></li>
+        <li><a href="tentang.html">Tentang Kami</a></li>
+        <li><a aria-current="page" href="produk.html">Produk</a></li>
+        <li><a href="galeri.html">Galeri</a></li>
+        <li><a href="kontak.html">Kontak</a></li>
+      </ul>
+    </details>
+
+    <ul class="desktop-menu">
       <li><a href="index.html">Beranda</a></li>
       <li><a href="tentang.html">Tentang Kami</a></li>
       <li><a aria-current="page" href="produk.html">Produk</a></li>
@@ -20,65 +38,97 @@
     </ul>
   </nav>
 </header>
-<main id="konten" class="page">
+
+<main id="konten" class="page container">
+
   <section class="hero" aria-labelledby="hero-title">
     <div class="hero-content">
       <h1 id="hero-title">Produk Kopi Nusa</h1>
-      <p>Pilih produk sesuai kebutuhan seduh harian, kantor, atau hadiah.</p>
+      <p>
+        Pilih produk sesuai kebutuhan seduh harian, kantor, atau hadiah.
+      </p>
     </div>
+
     <figure class="hero-image product-visual">
-      <img src="assets/images/produk-2.png" width="790" height="600" alt="Botol kemasan Cold Brew Aren lengkap dengan gelas es kopi">
-      <figcaption>Cold Brew Aren siap menemani aktivitas harian Anda.</figcaption>
+      <img
+        src="assets/images/produk-2.png"
+        width="790"
+        height="600"
+        alt="Botol kemasan Cold Brew Aren lengkap dengan gelas es kopi">
+      <figcaption>
+        Cold Brew Aren siap menemani aktivitas harian Anda.
+      </figcaption>
     </figure>
   </section>
+
   <section aria-labelledby="produk-pilihan-title">
     <h2 id="produk-pilihan-title">Produk Pilihan</h2>
+
     <div class="product-grid">
+
       <article class="product-card">
         <span class="product-badge">Terlaris</span>
         <h3>Kopi Tubruk Signature</h3>
         <p>Karakter cokelat dan kacang dengan body yang kuat.</p>
         <p class="price">Rp18.000</p>
+
         <div class="card-actions">
           <a class="button" href="kontak.html">Tanya produk!</a>
           <a href="#harga-title">Lihat tabel harga!</a>
         </div>
       </article>
+
       <article class="product-card">
         <span class="product-badge">Segar</span>
         <h3>Cold Brew Aren</h3>
         <p>Kopi dingin dengan rasa ringan dan manis aren seimbang.</p>
         <p class="price">Rp22.000</p>
+
         <div class="card-actions">
           <a class="button" href="kontak.html">Tanya produk!</a>
           <a href="#harga-title">Lihat tabel harga!</a>
         </div>
       </article>
+
       <article class="product-card">
         <span class="product-badge">Hemat</span>
         <h3>Kopi Susu Nusa</h3>
         <p>Espresso, susu segar, dan sedikit karamel.</p>
         <p class="price">Rp20.000</p>
+
         <div class="card-actions">
           <a class="button" href="kontak.html">Tanya produk!</a>
           <a href="#harga-title">Lihat tabel harga!</a>
         </div>
       </article>
+
     </div>
   </section>
+
   <section>
     <h2>Kategori Produk</h2>
+
     <ul>
       <li>Paket seduh rumahan</li>
       <li>Paket kantor mingguan</li>
       <li>Paket tester untuk pelanggan baru</li>
     </ul>
   </section>
+
   <section>
     <h2 id="harga-title">Daftar Produk</h2>
-    <div class="table-scroll" role="region" aria-labelledby="daftar-harga-caption" tabindex="0">
+
+    <div
+      class="table-scroll"
+      role="region"
+      aria-labelledby="daftar-harga-caption"
+      tabindex="0">
+
       <table>
-        <caption id="daftar-harga-caption">Daftar harga produk Kopi Nusa</caption>
+        <caption id="daftar-harga-caption">
+          Daftar harga produk Kopi Nusa
+        </caption>
+
         <thead>
           <tr>
             <th scope="col">Produk</th>
@@ -88,6 +138,7 @@
             <th scope="col">Keterangan</th>
           </tr>
         </thead>
+
         <tbody>
           <tr>
             <td>Kopi Tubruk Signature</td>
@@ -96,6 +147,7 @@
             <td>Tersedia (15)</td>
             <td>Kopi dengan rasa klasik dan aroma yang kuat</td>
           </tr>
+
           <tr>
             <td>Cold Brew Aren</td>
             <td>Rp22.000</td>
@@ -103,6 +155,7 @@
             <td>Terbatas (5)</td>
             <td>Kopi dingin dengan perpaduan kopi dan gula aren</td>
           </tr>
+
           <tr>
             <td>Kopi Susu Nusa</td>
             <td>Rp20.000</td>
@@ -111,12 +164,16 @@
             <td>Espresso, susu segar, dan sedikit karamel</td>
           </tr>
         </tbody>
+
       </table>
     </div>
   </section>
+
 </main>
+
 <footer class="site-footer">
   <p>&copy; 2026 Kopi Nusa. Semua hak dilindungi.</p>
 </footer>
+
 </body>
 </html>
