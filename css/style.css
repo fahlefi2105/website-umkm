@@ -294,9 +294,10 @@ li {
 
 .hero-image {
   display: block;
-  width: 100%;
-  max-width: 100%;
+  width: 75%;
+  max-width: 340px;
   height: auto;
+  margin-left: auto;
   border-radius: var(--radius-md);
   object-fit: cover;
 }
@@ -544,10 +545,6 @@ th {
   background: var(--color-surface-soft);
 }
 
-/* =========================
-   FORM
-========================= */
-
 form {
   min-width: 0;
   padding: var(--space-3);
@@ -612,11 +609,6 @@ input[type="checkbox"] {
   width: auto;
   max-width: none;
 }
-
-/* =========================
-   FORM PREVIEW
-========================= */
-
 #preview-form {
   max-width: 100%;
   padding: var(--space-3);
@@ -636,10 +628,6 @@ pre {
   overflow-wrap: anywhere;
   overflow-x: auto;
 }
-
-/* =========================
-   CONTACT
-========================= */
 
 .contact-section {
   min-width: 0;
@@ -736,5 +724,70 @@ pre {
 
   .hero {
     gap: var(--space-5);
+  }
+}
+
+.product-summary {
+  margin: 10px 0 20px;
+  padding: 12px 16px;
+  background: #fff8f0;
+  border-left: 4px solid #6f3b1f;
+  border-radius: 8px;
+  color: #2f2118;
+  font-weight: 600;
+}
+
+.product-detail {
+  margin: 6px 0;
+  font-size: 14px;
+  color: #5c4a3d;
+}
+
+.stock-status {
+  display: inline-block;
+  width: fit-content;
+  padding: 6px 10px;
+  margin: 8px 0;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.stok-tersedia {
+  background: #e3f5e7;
+  color: #216b35;
+}
+
+.stok-terbatas {
+  background: #fff0cc;
+  color: #805600;
+}
+
+.stok-habis {
+  background: #ffe0e0;
+  color: #a32121;
+}
+
+#product-list .product-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#product-list .card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: auto;
+}
+
+@media (max-width: 480px) {
+  .product-summary {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  #product-list .card-actions {
+    flex-direction: column;
   }
 }
