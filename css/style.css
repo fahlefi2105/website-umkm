@@ -19,6 +19,7 @@
 
   --shadow-card: 0 0.5rem 1.5rem rgb(47 33 24 / 0.1);
 }
+
 *,
 *::before,
 *::after {
@@ -89,14 +90,12 @@ textarea {
   top: var(--space-3);
 }
 
-
 .container,
 .nav,
 .page {
   width: min(100% - 2rem, 70rem);
   margin-inline: auto;
 }
-
 
 .site-header {
   background: var(--color-surface);
@@ -112,6 +111,7 @@ textarea {
   min-width: 0;
   padding-block: var(--space-3);
 }
+
 .brand {
   display: inline-block;
   flex: 0 0 auto;
@@ -121,6 +121,7 @@ textarea {
   white-space: nowrap;
 }
 
+/* ===== Menu mobile ===== */
 .mobile-menu {
   position: relative;
   display: block;
@@ -239,11 +240,11 @@ textarea {
   font-weight: 700;
   background: #fef3c7;
 }
+
 .page {
   padding-block: var(--space-5);
   min-width: 0;
 }
-
 
 h1,
 h2,
@@ -265,6 +266,7 @@ li {
   max-width: 68ch;
 }
 
+/* ===== Hero ===== */
 .hero {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -333,6 +335,7 @@ li {
   text-transform: uppercase;
 }
 
+/* ===== Tombol ===== */
 .button,
 button {
   display: inline-block;
@@ -367,6 +370,8 @@ button:hover {
   color: var(--color-text);
   background: #fde68a;
 }
+
+/* ===== Kartu produk ===== */
 .product-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -375,6 +380,7 @@ button:hover {
   min-width: 0;
   width: 100%;
 }
+
 .product-card {
   display: flex;
   flex-direction: column;
@@ -609,6 +615,7 @@ input[type="checkbox"] {
   width: auto;
   max-width: none;
 }
+
 #preview-form {
   max-width: 100%;
   padding: var(--space-3);
@@ -726,68 +733,148 @@ pre {
     gap: var(--space-5);
   }
 }
-
 .product-summary {
-  margin: 10px 0 20px;
-  padding: 12px 16px;
-  background: #fff8f0;
-  border-left: 4px solid #6f3b1f;
-  border-radius: 8px;
-  color: #2f2118;
+  margin: var(--space-2) 0 var(--space-4);
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-surface-soft);
+  border-left: 4px solid var(--color-primary);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
   font-weight: 600;
 }
 
 .product-detail {
-  margin: 6px 0;
-  font-size: 14px;
-  color: #5c4a3d;
+  margin: 0.4rem 0;
+  font-size: 0.875rem;
+  color: var(--color-muted);
 }
 
-.stock-status {
-  display: inline-block;
+.stock-badge {
+  display: inline-flex;
   width: fit-content;
-  padding: 6px 10px;
-  margin: 8px 0;
-  border-radius: 20px;
-  font-size: 13px;
-  font-weight: 600;
+  margin-block: var(--space-1);
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  background: #dcfce7;
+  color: #166534;
 }
 
-.stok-tersedia {
-  background: #e3f5e7;
-  color: #216b35;
+.stock-badge.warning {
+  background: #fef3c7;
+  color: #92400e;
 }
 
-.stok-terbatas {
-  background: #fff0cc;
-  color: #805600;
-}
-
-.stok-habis {
-  background: #ffe0e0;
-  color: #a32121;
+.stock-badge.empty {
+  background: #fee2e2;
+  color: #991b1b;
 }
 
 #product-list .product-card {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-#product-list .card-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: auto;
+  gap: 0.5rem;
 }
 
 @media (max-width: 480px) {
   .product-summary {
-    font-size: 14px;
-    padding: 10px;
+    font-size: 0.875rem;
+    padding: var(--space-2);
   }
+}
 
-  #product-list .card-actions {
-    flex-direction: column;
+.no-top-margin {
+  margin-top: var(--space-1);
+}
+
+.category-list {
+  padding-left: 1.25rem;
+}
+
+.category-list li {
+  margin-block: var(--space-1);
+}
+
+.section-note {
+  color: var(--color-muted);
+}
+
+.featured-card {
+  position: relative;
+}
+
+.featured-card .product-badge {
+  position: static;
+  align-self: flex-start;
+  margin-bottom: var(--space-2);
+}
+
+.featured-card .card-actions {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+}
+
+.product-highlight {
+  margin: 0 0 var(--space-3);
+  color: var(--color-primary-strong);
+  font-weight: 700;
+}
+
+.product-grid-2 .product-card h3 {
+  margin-block: 0 var(--space-1);
+}
+
+.product-grid-2 .product-card p {
+  margin-block: 0;
+}
+
+.product-grid-2 .product-card .price {
+  margin-top: var(--space-2);
+  font-size: 1.1rem;
+}
+
+@media (min-width: 40rem) {
+  .product-grid-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+}
+
+.table-box {
+  padding: var(--space-3);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+}
+
+.table-box .table-scroll {
+  margin-block: 0;
+}
+
+.table-box tbody tr:nth-child(even) {
+  background: var(--color-surface-soft);
+}
+
+
+/* ===== Harga promo ===== */
+.price-normal {
+  color: var(--color-muted);
+  font-weight: 400;
+  text-decoration: line-through;
+}
+
+.price-promo {
+  color: #991b1b;
+  font-weight: 800;
+}
+
+.discount-badge {
+  display: inline-block;
+  padding: 0.1rem 0.5rem;
+  color: #991b1b;
+  font-size: 0.8rem;
+  font-weight: 700;
+  background: #fee2e2;
+  border-radius: 999px;
 }

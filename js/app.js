@@ -1,123 +1,209 @@
+"use strict";
+
+console.log("P10 JavaScript aktif");
+
 const dataProduk = [
   {
-    nama: "Kopi Tubruk Signature",
-    kategori: "Kopi Bubuk",
-    harga: 18000,
+    nama: "Kopi Tubruk Signature",kategori: "Kopi Bubuk",
+    harga: 20000,
     stok: 15,
     ukuran: "250 gram",
-    deskripsi: "Karakter cokelat dan kacang dengan body yang kuat."
+    deskripsi: "Karakter cokelat dan kacang dengan body yang kuat.",
+    unggulan: true,
+    diskonPersen: 10
   },
   {
     nama: "Cold Brew Aren",
     kategori: "Minuman",
     harga: 22000,
-    stok: 5,
+    stok: 10,
     ukuran: "Botol 250 ml",
-    deskripsi: "Kopi dingin dengan rasa ringan dan manis aren seimbang."
+    deskripsi: "Kopi dingin dengan rasa ringan dan manis aren seimbang.",
+    unggulan: false
   },
   {
     nama: "Kopi Susu Nusa",
     kategori: "Minuman",
-    harga: 20000,
+    harga: 22222,
     stok: 20,
     ukuran: "Botol 250 ml",
-    deskripsi: "Espresso, susu segar, dan sedikit karamel."
+    deskripsi: "Espresso, susu segar, dan sedikit karamel.",
+    unggulan: false,
+    diskonPersen: 10
   },
   {
     nama: "Paket Tester Kopi Nusa",
     kategori: "Paket",
-    harga: 15000,
-    stok: 8,
+    harga: 25000,
+    stok: 3,
     ukuran: "3 sachet",
-    deskripsi: "Paket tester untuk pelanggan baru."
+    deskripsi: "Paket tester untuk pelanggan baru.",
+    unggulan: false
   }
 ];
 
-const productList = document.querySelector("#product-list");
-const productTableBody = document.querySelector("#product-table-body");
-const productSummary = document.querySelector("#product-summary");
-
-const formatRupiah = (angka) => {
+function formatRupiah(nilai) {
   return new Intl.NumberFormat("id-ID", {
     style: "currency",
     currency: "IDR",
     maximumFractionDigits: 0
-  }).format(angka);
-};
+  }).format(nilai);
+}
 
-function cekStok(stok) {
-  if (stok === 0) {
-    return "Stok habis";
-  } else if (stok <= 5) {
-    return "Stok terbatas";
-  } else {
-    return "Tersedia";
+function hitungHargaPromo(produk) {
+  const diskon = produk.diskonPersen;
+
+  if (typeof diskon !== "number" || !Number.isFinite(diskon)) {
+    return produk.harga;
   }
+  if (diskon <= 0 || diskon > 100) {
+    return produk.harga;
+  }
+
+  const potongan = (produk.harga * diskon) / 100;
+  return Math.round(produk.harga - potongan);
+}
+
+function buatHtmlHarga(produk) {
+  return formatRupiah(hitungHargaPromo(produk));
+}
+
+function buatHtmlHargaKartu(produk) {
+  const hargaPromo = hitungHargaPromo(produk);
+
+  if (hargaPromo >= produk.harga) {
+    return formatRupiah(produk.harga);
+  }
+
+  return `
+    <del class="price-normal">${formatRupiah(produk.harga)}</del>
+    <span class="price-promo">${formatRupiah(hargaPromo)}</span>
+    <span class="discount-badge">${produk.diskonPersen}%</span>
+  `;
+}
+
+function statusStok(stok) {
+  if (stok <= 0) {
+    return { label: "Stok habis", className: "empty" };
+  }
+  if (stok <= 5) {
+    return { label: "Stok terbatas", className: "warning" };
+  }
+  return { label: "Tersedia", className: "" };
 }
 
 function labelKategori(kategori) {
   switch (kategori) {
     case "Kopi Bubuk":
-      return "Terlaris";
+      return "Kopi seduh pilihan";
     case "Minuman":
-      return "Segar";
+      return "Minuman siap saji";
     case "Paket":
-      return "Paket Hemat";
+      return "Paket hemat";
     default:
-      return "Pilihan";
+      return "Produk UMKM";
   }
 }
 
-if (productList) {
-  productList.innerHTML = dataProduk.map((produk) => {
-    const statusStok = cekStok(produk.stok);
-    const kelasStok = produk.stok === 0 ? "stok-habis" :
-      produk.stok <= 5 ? "stok-terbatas" : "stok-tersedia";
 
-    return `
-      <article class="product-card">
-        <span class="product-badge">${labelKategori(produk.kategori)}</span>
-        <h3>${produk.nama}</h3>
-        <p>${produk.deskripsi}</p>
-        <p class="product-detail">Kategori: ${produk.kategori}</p>
-        <p class="product-detail">Ukuran: ${produk.ukuran}</p>
-        <p class="price">${formatRupiah(produk.harga)}</p>
-        <p class="stock-status ${kelasStok}">
-          ${statusStok} (${produk.stok})
-        </p>
-        <div class="card-actions">
-          <a class="button" href="kontak.html">Tanya produk!</a>
-          <a href="#harga-title">Lihat tabel harga!</a>
-        </div>
-      </article>
-    `;
-  }).join("");
+function buatKartuProduk(produk) {
+  const status = statusStok(produk.stok);
+  const kategori = labelKategori(produk.kategori);
+  const labelAksi = produk.stok > 0 ? "Siap dipesan" : "Hubungi admin";
+
+  return `
+    <article class="product-card js-product-card">
+      <h3>${produk.nama}</h3>
+      <p class="product-detail">${kategori} · ${produk.ukuran}</p>
+      <p>${produk.deskripsi}</p>
+      <p class="price">${buatHtmlHargaKartu(produk)}</p>
+      <p class="stock-badge ${status.className}">${status.label}</p>
+      <p class="product-detail">${labelAksi}</p>
+    </article>
+  `;
 }
 
-if (productTableBody) {
-  productTableBody.innerHTML = dataProduk.map((produk) => `
+function buatBarisTabel(produk) {
+  const status = statusStok(produk.stok);
+
+  return `
     <tr>
       <td>${produk.nama}</td>
-      <td>${formatRupiah(produk.harga)}</td>
       <td>${produk.ukuran}</td>
-      <td>${cekStok(produk.stok)} (${produk.stok})</td>
+      <td>${status.label} (${produk.stok})</td>
       <td>${produk.deskripsi}</td>
+      <td>${buatHtmlHarga(produk)}</td>
     </tr>
-  `).join("");
+  `;
 }
 
-// Operator untuk menghitung jumlah produk dan total stok.
-const jumlahProduk = dataProduk.length;
-const totalStok = dataProduk.reduce((total, produk) => {
-  return total + produk.stok;
-}, 0);
-
-if (productSummary) {
-  productSummary.textContent =
-    `Menampilkan ${jumlahProduk} produk Kopi Nusa dengan total stok ${totalStok} item.`;
+function hitungTotalStok(daftarProduk) {
+  let total = 0;
+  for (const produk of daftarProduk) {
+    total = total + produk.stok;
+  }
+  return total;
 }
 
-console.log("Data produk Kopi Nusa:");
-console.table(dataProduk);
-console.log("Jumlah produk:", jumlahProduk);
-console.log("Total stok:", totalStok);
+function logDebugProduk(daftarProduk) {
+  daftarProduk.forEach((produk) => {
+    console.log("Debug produk:", produk.nama, "stok:", produk.stok);
+  });
+  console.table(daftarProduk);
+}
+
+function renderProduk() {
+  const productList = document.querySelector("#product-list");
+  const productTableBody = document.querySelector("#product-table-body");
+  const productSummary = document.querySelector("#product-summary");
+  const productHighlight = document.querySelector("#product-highlight");
+
+  
+  if (!productList || !productTableBody) {
+    return;
+  }
+
+  logDebugProduk(dataProduk);
+
+  const produkTersedia = dataProduk.filter((produk) => produk.stok > 0);
+  const produkUnggulan = dataProduk.find((produk) => produk.unggulan === true);
+  
+  const kartuMarkup = produkTersedia.map(buatKartuProduk).join("");
+  const barisMarkup = dataProduk.map(buatBarisTabel).join("");
+
+  console.log("Jumlah produk tersedia:", produkTersedia.length);
+  dataProduk.forEach((produk) => {
+    console.log("Harga:", produk.nama, produk.harga, "->", hitungHargaPromo(produk));
+  });
+
+  productList.innerHTML = kartuMarkup;
+  productTableBody.innerHTML = barisMarkup;
+
+  if (productSummary) {
+    productSummary.textContent =
+      `${produkTersedia.length} produk tersedia dari ${dataProduk.length} data, total stok ${hitungTotalStok(dataProduk)} item.`;
+  }
+
+  if (productHighlight) {
+    productHighlight.textContent = produkUnggulan
+      ? `Produk unggulan: ${produkUnggulan.nama}`
+      : "Belum ada produk unggulan.";
+  }
+}
+
+function aktifkanTombolPromo() {
+  const promoButton = document.querySelector("#promoButton");
+
+  if (!promoButton) {
+    return;
+  }
+
+  promoButton.addEventListener("click", function () {
+    alert("Promo hari ini: beli 2 Kopi Susu Nusa, gratis 1 Kopi Tubruk Signature!");
+  });
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  renderProduk();
+  aktifkanTombolPromo();
+});

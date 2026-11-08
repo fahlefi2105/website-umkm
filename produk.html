@@ -42,8 +42,9 @@
 
 <main id="konten" class="page container">
 
-  <section class="hero product-hero" aria-labelledby="hero-title">
+  <section class="hero" aria-labelledby="hero-title">
     <div class="hero-content">
+      <p class="eyebrow">UMKM Pekalongan</p>
       <h1 id="hero-title">Produk Kopi Nusa</h1>
       <p>
         Pilih produk sesuai kebutuhan seduh harian, kantor, atau hadiah.
@@ -62,57 +63,117 @@
     </figure>
   </section>
 
+  <section aria-labelledby="kategori-title">
+    <h2 id="kategori-title">Kategori Produk</h2>
+
+    <ul class="category-list">
+      <li><strong>Paket seduh rumahan</strong> — untuk dinikmati santai di rumah.</li>
+      <li><strong>Paket kantor mingguan</strong> — stok kopi untuk tim dan rekan kerja.</li>
+      <li><strong>Paket tester</strong> — cocok untuk pelanggan baru.</li>
+    </ul>
+  </section>
+
   <section aria-labelledby="produk-pilihan-title">
     <h2 id="produk-pilihan-title">Produk Pilihan</h2>
+
+    <div class="product-grid">
+
+      <article class="product-card featured-card">
+        <span class="product-badge">Terlaris</span>
+        <h3>Kopi Tubruk Signature</h3>
+        <p>Kopi dengan rasa klasik dan aroma yang kuat.</p>
+        <p class="price">Rp18.000</p>
+        <div class="card-actions">
+          <a class="button" href="kontak.html">Tanya produk</a>
+          <a href="#harga-title">Lihat tabel harga</a>
+        </div>
+      </article>
+
+      <article class="product-card featured-card">
+        <span class="product-badge">Segar</span>
+        <h3>Cold Brew Aren</h3>
+        <p>Kopi dingin dengan perpaduan kopi dan gula aren.</p>
+        <p class="price">Rp22.000</p>
+        <div class="card-actions">
+          <a class="button" href="kontak.html">Tanya produk</a>
+          <a href="#harga-title">Lihat tabel harga</a>
+        </div>
+      </article>
+
+      <article class="product-card featured-card">
+        <span class="product-badge">Segar</span>
+        <h3>Kopi Susu Nusa</h3>
+        <p>Espresso, susu segar, dan sedikit karamel.</p>
+        <p class="price">Rp20.000</p>
+        <div class="card-actions">
+          <a class="button" href="kontak.html">Tanya produk</a>
+          <a href="#harga-title">Lihat tabel harga</a>
+        </div>
+      </article>
+
+      <article class="product-card featured-card">
+        <span class="product-badge">Paket Terbatas</span>
+        <h3>Paket Tester Kopi Nusa</h3>
+        <p>Paket tester untuk pelanggan baru.</p>
+        <p class="price">Rp25.000</p>
+        <div class="card-actions">
+          <a class="button" href="kontak.html">Tanya produk</a>
+          <a href="#harga-title">Lihat tabel harga</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section aria-labelledby="produk-js-title">
+    <p class="eyebrow">Data JavaScript</p>
+    <h2 id="produk-js-title" class="no-top-margin">Produk Kemasan Kami</h2>
 
     <p id="product-summary" class="product-summary" aria-live="polite">
       Daftar produk Kopi Nusa.
     </p>
+    <p id="product-highlight" class="product-highlight"></p>
 
-    <div class="product-grid" id="product-list">
-      <!-- Kartu produk ditampilkan melalui JavaScript dari dataProduk. -->
+    <div class="product-grid product-grid-2" id="product-list">
+      <!-- Kartu produk ditampilkan melalui JavaScript dari dataProduk (js/app.js). -->
+      <p>Memuat produk... Jika tidak muncul, aktifkan JavaScript di browser Anda.</p>
     </div>
   </section>
 
-  <section>
-    <h2>Kategori Produk</h2>
+  <section aria-labelledby="harga-title">
+    <h2 id="harga-title">Daftar Harga</h2>
 
-    <ul>
-      <li>Paket seduh rumahan</li>
-      <li>Paket kantor mingguan</li>
-      <li>Paket tester untuk pelanggan baru</li>
-    </ul>
-  </section>
+    <div class="table-box">
+      <div
+        class="table-scroll"
+        role="region"
+        aria-labelledby="daftar-harga-caption"
+        tabindex="0">
 
-  <section>
-    <h2 id="harga-title">Daftar Produk</h2>
+        <table>
+          <caption id="daftar-harga-caption">
+            Daftar harga produk Kopi Nusa
+          </caption>
 
-    <div
-      class="table-scroll"
-      role="region"
-      aria-labelledby="daftar-harga-caption"
-      tabindex="0">
+          <thead>
+            <tr>
+              <th scope="col">Produk</th>
+              <th scope="col">Ukuran</th>
+              <th scope="col">Stok</th>
+              <th scope="col">Keterangan</th>
+              <th scope="col">Harga</th>
+            </tr>
+          </thead>
 
-      <table>
-        <caption id="daftar-harga-caption">
-          Daftar harga produk Kopi Nusa
-        </caption>
+          <tbody id="product-table-body">
+            <!-- Data tabel diisi melalui JavaScript dari dataProduk (js/app.js). -->
+            <tr>
+              <td colspan="5">Data harga akan dimuat melalui JavaScript.</td>
+            </tr>
+          </tbody>
 
-        <thead>
-          <tr>
-            <th scope="col">Produk</th>
-            <th scope="col">Harga</th>
-            <th scope="col">Ukuran</th>
-            <th scope="col">Stok</th>
-            <th scope="col">Keterangan</th>
-          </tr>
-        </thead>
-
-        <tbody id="product-table-body">
-          <!-- Data tabel diisi melalui JavaScript dari dataProduk. -->
-        </tbody>
-
-      </table>
+        </table>
+      </div>
     </div>
   </section>
 
