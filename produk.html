@@ -129,12 +129,19 @@
     <p class="eyebrow">Data JavaScript</p>
     <h2 id="produk-js-title" class="no-top-margin">Produk Kemasan Kami</h2>
 
-    <p id="product-summary" class="product-summary" aria-live="polite">
+    <p id="produk-status" class="product-summary" aria-live="polite">
       Daftar produk Kopi Nusa.
     </p>
-    <p id="product-highlight" class="product-highlight"></p>
+    <p id="produk-unggulan" class="product-highlight"></p>
 
-    <div class="product-grid product-grid-2" id="product-list">
+    <div class="filter-bar" aria-label="Filter kategori produk">
+      <button type="button" class="filter-button is-active" data-filter="Semua">Semua</button>
+      <button type="button" class="filter-button" data-filter="Kopi">Kopi</button>
+      <button type="button" class="filter-button" data-filter="Bundling">Bundling</button>
+      <button type="button" class="filter-button" data-filter="Aksesori">Aksesori</button>
+    </div>
+
+    <div class="product-grid product-grid-2" id="produk-grid">
       <!-- Kartu produk ditampilkan melalui JavaScript dari dataProduk (js/app.js). -->
       <p>Memuat produk... Jika tidak muncul, aktifkan JavaScript di browser Anda.</p>
     </div>
@@ -158,17 +165,16 @@
           <thead>
             <tr>
               <th scope="col">Produk</th>
-              <th scope="col">Ukuran</th>
+              <th scope="col">Kategori</th>
               <th scope="col">Stok</th>
-              <th scope="col">Keterangan</th>
               <th scope="col">Harga</th>
             </tr>
           </thead>
 
-          <tbody id="product-table-body">
+          <tbody id="produk-tabel-body">
             <!-- Data tabel diisi melalui JavaScript dari dataProduk (js/app.js). -->
             <tr>
-              <td colspan="5">Data harga akan dimuat melalui JavaScript.</td>
+              <td colspan="4">Data harga akan dimuat melalui JavaScript.</td>
             </tr>
           </tbody>
 

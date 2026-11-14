@@ -1,209 +1,187 @@
 "use strict";
 
-console.log("P10 JavaScript aktif");
+console.log("P11 JavaScript aktif");
 
-const dataProduk = [
-  {
-    nama: "Kopi Tubruk Signature",kategori: "Kopi Bubuk",
-    harga: 20000,
-    stok: 15,
-    ukuran: "250 gram",
-    deskripsi: "Karakter cokelat dan kacang dengan body yang kuat.",
-    unggulan: true,
-    diskonPersen: 10
-  },
-  {
-    nama: "Cold Brew Aren",
-    kategori: "Minuman",
-    harga: 22000,
-    stok: 10,
-    ukuran: "Botol 250 ml",
-    deskripsi: "Kopi dingin dengan rasa ringan dan manis aren seimbang.",
-    unggulan: false
-  },
-  {
-    nama: "Kopi Susu Nusa",
-    kategori: "Minuman",
-    harga: 22222,
-    stok: 20,
-    ukuran: "Botol 250 ml",
-    deskripsi: "Espresso, susu segar, dan sedikit karamel.",
-    unggulan: false,
-    diskonPersen: 10
-  },
-  {
-    nama: "Paket Tester Kopi Nusa",
-    kategori: "Paket",
-    harga: 25000,
-    stok: 3,
-    ukuran: "3 sachet",
-    deskripsi: "Paket tester untuk pelanggan baru.",
-    unggulan: false
-  }
+const produkUmkm = [
+  { nama: "Kopi Tubruk Rumah", kategori: "Kopi", hargaNormal: 20000, diskon: 10, stok: 15, unggulan: true },
+  { nama: "Cold Brew Aren", kategori: "Kopi", hargaNormal: 22000, diskon: 0, stok: 10, unggulan: true },
+  { nama: "Kopi Susu Aren", kategori: "Kopi", hargaNormal: 22222, diskon: 10, stok: 20, unggulan: false },
+  { nama: "Paket Seduh Enak", kategori: "Bundling", hargaNormal: 75000, diskon: 0, stok: 1, unggulan: false },
 ];
 
 function formatRupiah(nilai) {
   return new Intl.NumberFormat("id-ID", {
     style: "currency",
     currency: "IDR",
-    maximumFractionDigits: 0
+    maximumFractionDigits: 0,
   }).format(nilai);
-}
-
-function hitungHargaPromo(produk) {
-  const diskon = produk.diskonPersen;
-
-  if (typeof diskon !== "number" || !Number.isFinite(diskon)) {
-    return produk.harga;
-  }
-  if (diskon <= 0 || diskon > 100) {
-    return produk.harga;
-  }
-
-  const potongan = (produk.harga * diskon) / 100;
-  return Math.round(produk.harga - potongan);
-}
-
-function buatHtmlHarga(produk) {
-  return formatRupiah(hitungHargaPromo(produk));
-}
-
-function buatHtmlHargaKartu(produk) {
-  const hargaPromo = hitungHargaPromo(produk);
-
-  if (hargaPromo >= produk.harga) {
-    return formatRupiah(produk.harga);
-  }
-
-  return `
-    <del class="price-normal">${formatRupiah(produk.harga)}</del>
-    <span class="price-promo">${formatRupiah(hargaPromo)}</span>
-    <span class="discount-badge">${produk.diskonPersen}%</span>
-  `;
 }
 
 function statusStok(stok) {
   if (stok <= 0) {
-    return { label: "Stok habis", className: "empty" };
+    return { label: "Habis", className: "empty" };
   }
+
   if (stok <= 5) {
     return { label: "Stok terbatas", className: "warning" };
   }
+
   return { label: "Tersedia", className: "" };
 }
 
 function labelKategori(kategori) {
   switch (kategori) {
-    case "Kopi Bubuk":
-      return "Kopi seduh pilihan";
-    case "Minuman":
-      return "Minuman siap saji";
-    case "Paket":
+    case "Kopi":
+      return "Produk kopi pilihan";
+    case "Bundling":
       return "Paket hemat";
     default:
       return "Produk UMKM";
   }
 }
 
-
-function buatKartuProduk(produk) {
-  const status = statusStok(produk.stok);
-  const kategori = labelKategori(produk.kategori);
-  const labelAksi = produk.stok > 0 ? "Siap dipesan" : "Hubungi admin";
-
-  return `
-    <article class="product-card js-product-card">
-      <h3>${produk.nama}</h3>
-      <p class="product-detail">${kategori} · ${produk.ukuran}</p>
-      <p>${produk.deskripsi}</p>
-      <p class="price">${buatHtmlHargaKartu(produk)}</p>
-      <p class="stock-badge ${status.className}">${status.label}</p>
-      <p class="product-detail">${labelAksi}</p>
-    </article>
-  `;
+function hitungHarga(produk) {
+  return Math.round(produk.hargaNormal * (1 - produk.diskon / 100));
 }
 
-function buatBarisTabel(produk) {
-  const status = statusStok(produk.stok);
+const produkGrid = document.querySelector("#produk-grid");
+const produkStatus = document.querySelector("#produk-status");
+const produkUnggulanEl = document.querySelector("#produk-unggulan");
+const produkTabelBody = document.querySelector("#produk-tabel-body");
+const tombolFilter = document.querySelectorAll("[data-filter]");
 
-  return `
+function buatElemenProduk(produk) {
+  const status = statusStok(produk.stok);
+  const adaDiskon = produk.diskon > 0;
+
+  const card = document.createElement("article");
+  card.classList.add("product-card", "js-product-card");
+
+  const title = document.createElement("h3");
+  title.textContent = produk.nama;
+
+  const category = document.createElement("p");
+  category.classList.add("product-detail");
+  category.textContent = labelKategori(produk.kategori);
+
+  const price = document.createElement("p");
+  price.classList.add("price");
+
+  if (adaDiskon) {
+    const old = document.createElement("del");
+    old.classList.add("price-normal");
+    old.textContent = formatRupiah(produk.hargaNormal);
+    price.append(old, " ");
+  }
+
+  const harga = document.createElement("span");
+  harga.textContent = formatRupiah(hitungHarga(produk));
+  if (adaDiskon) {
+    harga.classList.add("price-promo");
+  }
+  price.append(harga);
+
+  if (adaDiskon) {
+    const badge = document.createElement("span");
+    badge.classList.add("discount-badge");
+    badge.textContent = `-${produk.diskon}%`;
+    price.append(" ", badge);
+  }
+
+  const stock = document.createElement("span");
+  stock.classList.add("stock-badge");
+  if (status.className) {
+    stock.classList.add(status.className);
+  }
+  stock.textContent = status.label;
+
+  const removeButton = document.createElement("button");
+  removeButton.type = "button";
+  removeButton.textContent = "Sembunyikan";
+  removeButton.classList.add("ghost-button");
+  removeButton.addEventListener("click", () => {
+    card.remove();
+    if (produkStatus) {
+      produkStatus.textContent = "Satu kartu disembunyikan dari tampilan sementara.";
+    }
+  });
+
+  card.append(title, category, price, stock, removeButton);
+  return card;
+}
+
+function buatEmptyState(kategori) {
+  const empty = document.createElement("p");
+  empty.classList.add("empty-state");
+  empty.textContent = `Belum ada produk pada kategori ${kategori}.`;
+  return empty;
+}
+
+function renderProduk(kategoriAktif = "Semua") {
+  if (!produkGrid || !produkStatus) {
+    console.warn("Target render produk tidak ditemukan.");
+    return;
+  }
+
+  console.log("Render kategori:", kategoriAktif);
+
+  const produkTampil = kategoriAktif === "Semua"
+    ? produkUmkm
+    : produkUmkm.filter((produk) => produk.kategori === kategoriAktif);
+
+  produkGrid.replaceChildren();
+
+  if (produkTampil.length === 0) {
+    produkGrid.append(buatEmptyState(kategoriAktif));
+    produkStatus.textContent = "0 produk ditemukan.";
+    return;
+  }
+
+  produkTampil.forEach((produk) => {
+    produkGrid.append(buatElemenProduk(produk));
+  });
+
+  produkStatus.textContent = `${produkTampil.length} produk ditampilkan.`;
+}
+
+function renderUnggulan() {
+  if (!produkUnggulanEl) {
+    return;
+  }
+
+  const unggulan = produkUmkm.find((produk) => produk.unggulan === true);
+  produkUnggulanEl.textContent = unggulan
+    ? `Produk unggulan: ${unggulan.nama}`
+    : "Belum ada produk unggulan.";
+}
+
+function renderTabel() {
+  if (!produkTabelBody) {
+    return;
+  }
+
+  produkTabelBody.innerHTML = produkUmkm.map((produk) => `
     <tr>
       <td>${produk.nama}</td>
-      <td>${produk.ukuran}</td>
-      <td>${status.label} (${produk.stok})</td>
-      <td>${produk.deskripsi}</td>
-      <td>${buatHtmlHarga(produk)}</td>
+      <td>${produk.kategori}</td>
+      <td>${statusStok(produk.stok).label} (${produk.stok})</td>
+      <td>${formatRupiah(hitungHarga(produk))}</td>
     </tr>
-  `;
+  `).join("");
 }
 
-function hitungTotalStok(daftarProduk) {
-  let total = 0;
-  for (const produk of daftarProduk) {
-    total = total + produk.stok;
-  }
-  return total;
-}
+tombolFilter.forEach((tombol) => {
+  tombol.addEventListener("click", (event) => {
+    const tombolAktif = event.currentTarget;
+    const kategori = tombolAktif.dataset.filter;
 
-function logDebugProduk(daftarProduk) {
-  daftarProduk.forEach((produk) => {
-    console.log("Debug produk:", produk.nama, "stok:", produk.stok);
+    tombolFilter.forEach((item) => item.classList.remove("is-active"));
+    tombolAktif.classList.add("is-active");
+
+    renderProduk(kategori);
   });
-  console.table(daftarProduk);
-}
-
-function renderProduk() {
-  const productList = document.querySelector("#product-list");
-  const productTableBody = document.querySelector("#product-table-body");
-  const productSummary = document.querySelector("#product-summary");
-  const productHighlight = document.querySelector("#product-highlight");
-
-  
-  if (!productList || !productTableBody) {
-    return;
-  }
-
-  logDebugProduk(dataProduk);
-
-  const produkTersedia = dataProduk.filter((produk) => produk.stok > 0);
-  const produkUnggulan = dataProduk.find((produk) => produk.unggulan === true);
-  
-  const kartuMarkup = produkTersedia.map(buatKartuProduk).join("");
-  const barisMarkup = dataProduk.map(buatBarisTabel).join("");
-
-  console.log("Jumlah produk tersedia:", produkTersedia.length);
-  dataProduk.forEach((produk) => {
-    console.log("Harga:", produk.nama, produk.harga, "->", hitungHargaPromo(produk));
-  });
-
-  productList.innerHTML = kartuMarkup;
-  productTableBody.innerHTML = barisMarkup;
-
-  if (productSummary) {
-    productSummary.textContent =
-      `${produkTersedia.length} produk tersedia dari ${dataProduk.length} data, total stok ${hitungTotalStok(dataProduk)} item.`;
-  }
-
-  if (productHighlight) {
-    productHighlight.textContent = produkUnggulan
-      ? `Produk unggulan: ${produkUnggulan.nama}`
-      : "Belum ada produk unggulan.";
-  }
-}
-
-function aktifkanTombolPromo() {
-  const promoButton = document.querySelector("#promoButton");
-
-  if (!promoButton) {
-    return;
-  }
-
-  promoButton.addEventListener("click", function () {
-    alert("Promo hari ini: beli 2 Kopi Susu Nusa, gratis 1 Kopi Tubruk Signature!");
-  });
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-  renderProduk();
-  aktifkanTombolPromo();
 });
+
+renderProduk();
+renderUnggulan();
+renderTabel();

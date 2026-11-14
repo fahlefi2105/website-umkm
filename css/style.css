@@ -771,7 +771,7 @@ pre {
   color: #991b1b;
 }
 
-#product-list .product-card {
+#produk-grid .product-card {
   gap: 0.5rem;
 }
 
@@ -877,4 +877,54 @@ pre {
   font-weight: 700;
   background: #fee2e2;
   border-radius: 999px;
+}
+
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-block: var(--space-3) var(--space-4);
+}
+
+.filter-button {
+  padding: 0.65rem 1rem;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+}
+
+.filter-button:hover,
+.filter-button:focus-visible {
+  color: var(--color-primary-strong);
+  background: var(--color-surface-soft);
+  border-color: var(--color-primary);
+}
+
+.filter-button.is-active {
+  color: var(--color-surface);
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.empty-state {
+  grid-column: 1 / -1;
+  padding: var(--space-3);
+  color: var(--color-muted);
+  background: var(--color-surface);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.ghost-button {
+  align-self: flex-start;
+  margin-top: var(--space-1);
+  color: var(--color-primary);
+  background: transparent;
+  border: 1px solid var(--color-border);
+}
+
+.ghost-button:hover {
+  color: var(--color-primary-strong);
+  background: var(--color-surface-soft);
 }
